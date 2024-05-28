@@ -17,7 +17,7 @@ function executeQuery(host, port, username, password, query) {
 }
 
 const dbHost = 'localhost';
-const dbPort = 5432;
+const dbPort = 1234;
 const dbUsername = 'admin';
 const dbPassword = 'password';
 const dbQuery = 'SELECT * FROM users';
