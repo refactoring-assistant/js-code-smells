@@ -2,12 +2,7 @@
 
 ### Problem
 
-Data clumps occur when groups of variables that are frequently used together appear throughout the codebase. These groups often represent a cohesive entity, but instead of being encapsulated into a single object or data structure, they are passed around individually. This leads to several issues, including:
-
-- **Repetition:** The same sets of variables are repeatedly declared and passed around, making the code verbose and harder to maintain.
-- **Errors:** It's easy to make mistakes when handling multiple related variables separately, such as passing them in the wrong order or forgetting one of them.
-- **Changes:** When the data structure needs to change, every function that uses the clump of variables must be updated, increasing the likelihood of introducing bugs.
-- **Readability:** The code becomes harder to read and understand, as the relationships between the variables are not explicitly stated.
+Data clumps occur when groups of variables that are frequently used together appear throughout the codebase. These groups often represent a cohesive entity, but instead of being encapsulated into a single object or data structure, they are passed around individually.
 
 An example of the data clumps code smell can be found [here](db-connect-bad.js). This example demonstrates the problem of data clumps by passing individual parameters that logically belong together.
 

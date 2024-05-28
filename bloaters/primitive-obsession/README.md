@@ -2,7 +2,15 @@
 
 ### Problem
 
+A primitive obsession code smell occurs when primitive data types are overused instead of using objects or classes to represent more complex data structures. This can lead to code that is difficult to understand and maintain.
+
+An example of the primitive obsession code smell can be found [here](customer-bad.js).
+
 ### Refactoring
+
+Addressing the primitive obsession code smell typically involves refactoring the code to replace primitive data types with objects or classes that encapsulate the data and behavior. This improves readability, maintainability, and adherence to object-oriented design principles.
+
+The refactored example is shown [here](customer-good.js).
 
 ### Executing the Examples
 
