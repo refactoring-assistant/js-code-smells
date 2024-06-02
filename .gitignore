@@ -131,3 +131,9 @@ dist
 
 # VS code
 .vscode/
+
+# ignore pycache
+__pycache__/
+
+#ignore virtual env
+venv/
