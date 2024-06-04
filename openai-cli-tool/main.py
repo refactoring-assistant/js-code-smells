@@ -11,7 +11,7 @@ code_file = 'inputs/code_snippet_3.js'
 output_file = 'outputs/code_analysis_3.md'
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-client = OpenAI(api_key="sk-proj-ol7Sy6lS8f8VhZacCSj4T3BlbkFJgOueQCSQE3RUxw9rZeiV")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def print_response(response):
     print("")
