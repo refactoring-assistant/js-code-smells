@@ -68,5 +68,6 @@ console.log(`New Area after scaling: ${rect.calculateArea()}`);
 No other significant code smells from the provided list are evident in this snippet.
 
 ### Summary of Identified Code Smells:
+
 1. **Comments** during obvious explanations can be removed.
 2. **Data Class** where the addition of meaningful behavior can enhance class purpose or simplify using a structure.
