@@ -13,16 +13,15 @@ code_file = 'inputs/code_snippet_3.js'
 output_file = 'outputs/code_analysis_3.md'
 ```
 
-## Update API Key
+## Set Python version
 
-Replace OPENAI_API_KEY with the string containing the API key.
-
-```python
-client = OpenAI(api_key=OPENAI_API_KEY)
+```bash
+python3.11 -m venv openai-env
+source openai-env/bin/activate
 ```
 
-
 ## Run Program
+
 ```bash
-python main.py
+python generate
 ```
