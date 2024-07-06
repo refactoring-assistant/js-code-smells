@@ -131,6 +131,3 @@ dist
 
 # VS code
 .vscode/
-
-# openai virtual environment
-openai-cli-tool/openai-env/
