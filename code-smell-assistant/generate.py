@@ -199,7 +199,6 @@ def main():
     examples = generate_code_smell_examples(normalized_smell, num_examples, examples_text)
     save_examples(examples, normalized_category, normalized_smell)
 
-    # chat for asking clarifying questions
     conversation = [
         {"role": "system", "content": "You are a helpful assistant skilled in explaining code smells and programming concepts."},
         {"role": "assistant", "content": "I have generated the requested code smell examples. How can I assist you further?"}
