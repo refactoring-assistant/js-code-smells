@@ -112,17 +112,18 @@ def create_prompt(code_smell, num_examples, examples_text):
         {"role": "system", "content": "You are a skilled assistant specialized in generating examples of code smells in programming code."},
         {"role": "user", "content": f"""
             Generate {num_examples} unique JavaScript examples that clearly illustrate the following code smell: {code_smell}. 
-            Each example should contain only the specified code smell and no other code smells. The examples should be concise, 
-            self-contained, and focused on demonstrating the code smell of interest.
+            Each example should contain only the specified code smell of interest and no other code smells. The examples should 
+            be concise, self-contained, and focused on demonstrating the code smell of interest.
 
-            Do not include any headers, comments, or preamble before or after the code smell examples. Do not generate any explaining for the 
-            code before or after the code snippet. Generate only the code smell examples, which should follow this format:
+            Do not include any headers, comments, or preamble before or after the code smell examples. Generate only the code 
+            smell examples, which should follow this format:
 
             ~~~{PROGRAMMING_LANGUAGE.lower()}
             // AI-generated code smell for {code_smell.title()}
             <code_snippet>
             ~~~
 
+            Ensure the examples do not include any explanations or additional text beyond the code snippet itself. 
             Your entire output should begin and end with ~~~
 
             Code smell of interest: {code_smell}
@@ -134,11 +135,20 @@ def create_prompt(code_smell, num_examples, examples_text):
     ]
 
 def normalize_code_smell_examples(raw_examples):
-    examples = [
-        example.strip().replace("~~~", "").strip() 
-        for example in raw_examples 
-        if example.strip() and "AI-generated code smell for" in example]
-    
+    examples = []
+    for example in raw_examples:
+        example = example.strip().replace("~~~", "").strip()
+        if example and "AI-generated code smell for" in example:
+            code_snippet = example.split('\n')
+            clean_code = []
+            for line in code_snippet:
+                if line.startswith('// AI-generated code smell for') or line.strip().startswith('}'):
+                    clean_code.append(line)
+                elif not line.startswith('//'):
+                    clean_code.append(line)
+                else:
+                    break
+            examples.append('\n'.join(clean_code))
     return examples
 
 def generate_bulk_examples(num_examples):
@@ -224,6 +234,8 @@ def main():
         generate_bulk_examples(num_examples)
     else:
         example_files = get_example_files_path(normalized_smell)
+        if example_files is None:
+            example_files = []
 
     print("")
     print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")
