@@ -31,7 +31,7 @@ def list_code_smells():
             print(f" - {smell}")
     
     print("")
-    print("\nBulk Create All Examples:")
+    print("\nBulk Create Examples For All Code Smells:")
     print(" - all")
 
 def get_user_input(prompt):
