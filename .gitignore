@@ -133,4 +133,4 @@ dist
 .vscode/
 
 # openai virtual environment
-openai-cli-tool/openai-env/
+code-smell-assistant/openai-env/

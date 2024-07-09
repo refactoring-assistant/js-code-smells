@@ -29,6 +29,10 @@ def list_code_smells():
         for smell in smells:
             print("")
             print(f" - {smell}")
+    
+    print("")
+    print("\nBulk Create All Examples:")
+    print(" - all")
 
 def get_user_input(prompt):
     user_input = input(prompt).strip()
@@ -50,9 +54,11 @@ def normalize_code_smell_input(input_smell):
     return input_smell.strip().lower().replace(" ", "-").replace("_", "-")
 
 def get_code_smell_category(input_smell):
-    input_code_smell = input_smell.strip().title()
+    if input_smell.lower() == "all":
+        return "all"
+    title_cased_smell = input_smell.strip().title()
     for category, smells in all_code_smells.items():
-        if input_code_smell in smells:
+        if title_cased_smell in smells:
             return category
     return None
 
@@ -65,15 +71,19 @@ def get_code_smell_and_category():
             print("")
             print(f"Invalid code smell name: {user_input_smell}. Please try again.")
         else:
+            if category == "all":
+                return "all", "all"
             normalized_smell = normalize_code_smell_input(user_input_smell)
             normalized_category = normalize_code_smell_input(category)
             return normalized_smell, normalized_category
 
 def get_example_files_path(user_input_smell):
     while True:
-        directory_path = get_user_input(f"Please enter the path to the directory containing code examples of the '{user_input_smell}' code smell: ")
+        directory_path = get_user_input(f"Please enter the path to the directory containing code examples of the '{user_input_smell}' code smell (or press Enter to skip): ")
         print("")
-        if os.path.isdir(directory_path):
+        if directory_path == "":
+            return None
+        elif os.path.isdir(directory_path):
             example_files = get_example_files(directory_path)
             if example_files:
                 return example_files
@@ -83,13 +93,21 @@ def get_example_files_path(user_input_smell):
             print(f"Invalid directory path: {directory_path}. Please try again.")
 
 def read_example_files(example_paths):
+    if example_paths is None:
+        return ""
     examples_text = ""
     for path in example_paths:
         with open(path, 'r') as file:
             examples_text += f"\n~~~{PROGRAMMING_LANGUAGE.lower()}\n{file.read()}\n~~~\n"
     return examples_text
 
+
 def create_prompt(code_smell, num_examples, examples_text):
+    if examples_text:
+        reference_section = f"\nFor reference, here is some example code for the code smell:\n\n{examples_text}\n"
+    else:
+        reference_section = "\n"
+
     return [
         {"role": "system", "content": "You are a skilled assistant specialized in generating examples of code smells in programming code."},
         {"role": "user", "content": f"""
@@ -105,13 +123,10 @@ def create_prompt(code_smell, num_examples, examples_text):
             <code_snippet>
             ~~~
 
-            All code smell examples should begin and end with ~~~
-
-            For reference, here is some example code for the code smell:
-
-            {examples_text}
+            Your entire output should begin and end with ~~~
 
             Code smell of interest: {code_smell}
+            {reference_section}
             
             Ensure the examples are varied and showcase different ways the code smell can manifest in {PROGRAMMING_LANGUAGE} code.
             """
@@ -125,6 +140,20 @@ def normalize_code_smell_examples(raw_examples):
         if example.strip() and "AI-generated code smell for" in example]
     
     return examples
+
+def generate_bulk_examples(num_examples):
+    for category, smells in all_code_smells.items():
+        normalized_category = normalize_code_smell_input(category)
+        for smell in smells:
+            normalized_smell = normalize_code_smell_input(smell)
+            print("")
+            print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")
+
+            # Skip example files path retrieval for bulk creation
+            examples_text = ""
+            examples = generate_code_smell_examples(normalized_smell, num_examples, examples_text)
+            save_examples(examples, normalized_category, normalized_smell)
+
 
 def generate_code_smell_examples(code_smell, num_examples, examples_text):
     messages = create_prompt(code_smell, num_examples, examples_text)
@@ -190,7 +219,11 @@ def main():
 
     normalized_smell, normalized_category = get_code_smell_and_category()
     num_examples = validate_num_examples()
-    example_files = get_example_files_path(normalized_smell)
+
+    if normalized_smell == 'all':
+        generate_bulk_examples(num_examples)
+    else:
+        example_files = get_example_files_path(normalized_smell)
 
     print("")
     print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")

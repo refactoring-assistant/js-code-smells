@@ -29,7 +29,7 @@ python generate.py
 #### Follow the prompts:
 - Enter the **name of the code smell** you want to generate examples for.
 - Enter the **number of examples** to generate.
-- Provide the **path to the directory containing the example code** files.
+- Provide the **path to the directory containing the example code** files (optional).
 
 #### Example Session
 ```bash
