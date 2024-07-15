@@ -134,3 +134,6 @@ dist
 
 # openai virtual environment
 code-smell-assistant/openai-env/
+
+#miscellaneous
+*.DS_Store
