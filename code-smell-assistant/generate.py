@@ -151,7 +151,26 @@ def normalize_code_smell_examples(raw_examples):
             examples.append('\n'.join(clean_code))
     return examples
 
-def generate_bulk_examples(num_examples):
+def get_user_directory():
+    while True:
+        user_input = get_user_input("Do you want to provide a directory with example code smells? (yes/no): ").strip().lower()
+        if user_input in ["yes", "no"]:
+            break
+        else:
+            print("Please enter 'yes' or 'no'.")
+    
+    if user_input == "yes":
+        while True:
+            directory_path = get_user_input("Please enter the path to the directory containing code examples (or press Enter to skip): ").strip()
+            if directory_path == "":
+                return None
+            elif os.path.isdir(directory_path):
+                return directory_path
+            else:
+                print(f"Invalid directory path: {directory_path}. Please try again.")
+    return None
+
+def generate_bulk_examples(num_examples, base_directory=None):
     for category, smells in all_code_smells.items():
         normalized_category = normalize_code_smell_input(category)
         for smell in smells:
@@ -159,8 +178,12 @@ def generate_bulk_examples(num_examples):
             print("")
             print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")
 
-            # Skip example files path retrieval for bulk creation
             examples_text = ""
+            if base_directory:
+                example_files = get_example_files(base_directory)
+                if example_files:
+                    examples_text = read_example_files(example_files)
+
             examples = generate_code_smell_examples(normalized_smell, num_examples, examples_text)
             save_examples(examples, normalized_category, normalized_smell)
 
@@ -231,18 +254,19 @@ def main():
     num_examples = validate_num_examples()
 
     if normalized_smell == 'all':
-        generate_bulk_examples(num_examples)
+        user_directory = get_user_directory()
+        generate_bulk_examples(num_examples, user_directory)
     else:
         example_files = get_example_files_path(normalized_smell)
         if example_files is None:
             example_files = []
-
-    print("")
-    print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")
-
-    examples_text = read_example_files(example_files)
-    examples = generate_code_smell_examples(normalized_smell, num_examples, examples_text)
-    save_examples(examples, normalized_category, normalized_smell)
+            
+            print("")
+            print(f"\nGenerating {num_examples} examples of the '{normalized_smell}' code smell...")
+            
+            examples_text = read_example_files(example_files)
+            examples = generate_code_smell_examples(normalized_smell, num_examples, examples_text)
+            save_examples(examples, normalized_category, normalized_smell)
 
     conversation = [
         {"role": "system", "content": "You are a helpful assistant skilled in explaining code smells and programming concepts."},
