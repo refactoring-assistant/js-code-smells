@@ -1,21 +1,18 @@
-import json
 import os
-from openai import OpenAI
+import openai
+import json
 from dotenv import load_dotenv
 from code_smells import all_code_smells
 
 load_dotenv()
 
-GPT_model = "gpt-4o"
-code_file = 'inputs/code_snippet.js'
-output_file = 'outputs/code_analysis_1.md'
-
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-client = OpenAI(api_key="sk-proj-ol7Sy6lS8f8VhZacCSj4T3BlbkFJgOueQCSQE3RUxw9rZeiV")
+openai.api_key = os.getenv('OPENAI_API_KEY')
+GPT_model = "gpt-4"
+OUTPUT_FILE = 'outputs/code_analysis_2.md'
+CODE_FILE = 'inputs/code_snippet_2.js'  # Replace with the actual path to your code file
 
 def print_response(response):
-    print("")
-    print(f"Assistant: {response}")
+    print(f"\nAssistant: {response}")
 
 def analyze_code_snippet(code_snippet):
     initial_messages = [
@@ -52,17 +49,17 @@ def analyze_code_snippet(code_snippet):
 
     print("Generating feedback...")
 
-    completion = client.chat.completions.create(
+    completion = openai.chat.completions.create(
         model=GPT_model,
         messages=initial_messages
     )
 
     print("Working...")
 
-    result = completion.choices[0].message.content
+    result = completion.choices[0].message['content']
 
     os.makedirs('outputs', exist_ok=True)
-    with open(output_file, 'w') as md_file:
+    with open(OUTPUT_FILE, 'w') as md_file:
         md_file.write(result)
     
     print("Code review now available in code_analysis.md!")
@@ -71,28 +68,29 @@ def analyze_code_snippet(code_snippet):
 def chat_with_assistant(conversation):
     print("Do you have any additional questions about the code snippet?")
     while True:
-        print("")
-        user_input = input("You: ")
+        user_input = input("\nYou: ")
         if user_input.lower() in ["quit", "exit", "bye"]:
-            print("")
-            print("Goodbye!")
+            print("\nGoodbye!")
             break
         
         conversation.append({"role": "user", "content": user_input})
         
-        response = client.chat.completions.create(
+        response = openai.chat.completions.create(
             model=GPT_model,
             messages=conversation
         )
 
-        assistant_response = response.choices[0].message.content
+        assistant_response = response.choices[0].message['content']
         print_response(assistant_response)
         
         conversation.append({"role": "assistant", "content": assistant_response})
 
-if __name__ == '__main__':
-    with open(code_file, 'r') as file:
+def main():
+    with open(CODE_FILE, 'r') as file:
         code_snippet = file.read()
     
     conversation = analyze_code_snippet(code_snippet)
     chat_with_assistant(conversation)
+
+if __name__ == '__main__':
+    main()
