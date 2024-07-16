@@ -1,1 +1,0 @@
-// AI-generated code smell for Parallel-Inheritance-Hierarchies

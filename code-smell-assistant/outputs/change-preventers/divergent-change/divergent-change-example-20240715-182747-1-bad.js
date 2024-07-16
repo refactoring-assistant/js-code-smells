@@ -22,5 +22,3 @@ class Order {
         }, 0);
     }
 }
-
-This shows a Divergent change as the Order class has more than one reason to change. If any invoice formatting changes, the `printInvoice` changes. If the pricing calculation method changes the `calculateTotalPrice` changes. These are logically different changes, indicating that the class has more than one responsibility leading to divergent change, breaking the SRP principle.

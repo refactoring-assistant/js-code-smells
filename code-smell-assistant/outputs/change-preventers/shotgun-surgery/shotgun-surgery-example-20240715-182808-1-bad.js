@@ -36,5 +36,3 @@ class Vendor {
         console.log(`Name: ${this.name}, Age: ${this.age}, Email: ${this.email}, Company: ${this.company}`);
     }
 }
-
-In the above example, making changes in how details are printed would involve making changes to the printDetails functions in several places - i.e., in User, Admin, and Vendor classes. This is a clear example of the Shotgun Surgery code smell.

@@ -18,6 +18,3 @@ class Bank {
 const bank = new Bank();
 const cust = new Customer(bank);
 console.log(cust.getBalance());
-
-
-The Customer class acts as a middle-man between the client and Bank class, providing no additional functionality. It merely forwards the request.
