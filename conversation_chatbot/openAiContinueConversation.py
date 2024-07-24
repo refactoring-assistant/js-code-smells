@@ -3,53 +3,40 @@ import os
 from decouple import config
 from openai import OpenAI
 # from trialMsg import code_trial
-from code_smells_list import code_smells
+from fine_tuning_trials.code_smells_list import code_smells
 from parseZipJS import extractJStoString
 from zipExtract import deleteExtractedFiles
+from chatgptUtils import calculate_tokens
+from system_utils import make_dir, save_file_name_format, save_output
+from systemMsg import system_message, get_user_query, endline_break
 
 OPENAI_API_KEY = config("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 # openai_model = "gpt-4o"
+# openai_model = "gpt-4o-mini"
 openai_model = "ft:gpt-3.5-turbo-0125:joysopenailab::9iWwIYRO"
 model_name = openai_model.split(":")[-1]
 
 list_code_smells = code_smells()
 currDir = os.getcwd()
+output_dir = os.path.join(currDir, "chatgpt_outputs")
+extract_endline = endline_break()
 
+system_role = system_message()
 
 # Initialize the conversation with a system message
 conversation_history = [
-    {"role": "system", "content": '''You are a teaching assistant for 
-        the course foundations of software engineering. When asked to view a submission,
-        you view javascript code submissions find the code smells in the each code file,
-        and give back reviews to the students in a particular format using markdown. The
-        returned report should be in markdown format.
-        
-        Detect among the following code smells = {smell_list}
-        Long methods code smell only exists if the method has more than 30 lines of code.
-        
-        This is the format of the report=
-        Code Review:
-        - Code smell no. -
-        - Code smell name -
-        - Code smell description -
-        - Found in line no. -
-        - Possible solution -
-        
-        Otherwise you just answer the questions asked by the user. Do not generate a 
-        report unless asked by the user.
-        '''.format(smell_list=list_code_smells)
-    },
+    system_role,
 ]
+
 
 def manage_context(conversation_history, max_tokens=128000):
     # Calculate the total tokens
-    total_tokens = sum([len(message['content'].split()) for message in conversation_history])
-    
+    total_tokens = sum([calculate_tokens(message['content']) for message in conversation_history])
     # If total tokens exceed max tokens, truncate the conversation history
     while total_tokens > max_tokens:
         conversation_history.pop(1)  # Remove the oldest user message and assistant response
-        total_tokens = sum([len(message['content'].split()) for message in conversation_history])
+        total_tokens = sum([calculate_tokens(message['content']) for message in conversation_history])
     
     return conversation_history
 
@@ -57,16 +44,20 @@ def manage_context(conversation_history, max_tokens=128000):
 def get_response(user_query):
     global conversation_history
     # Add user input to the conversation history
-    conversation_history.append({"role": "user", "content": user_query})
-    conversation_history = manage_context(conversation_history)
+    send_conv_history = conversation_history.copy()
+    send_conv_history.append({"role": "user", "content": user_query})
+    send_conv_history = manage_context(send_conv_history)
+    # conversation_history.append({"role": "user", "content": user_query})
+    # conversation_history = manage_context(conversation_history)
     # Call the OpenAI API to get the response
     completion = client.chat.completions.create(
     model=openai_model,
-    messages=conversation_history
+    messages=send_conv_history
     )
 
     # Extract the assistant's response
     assistant_response = completion.choices[0].message.content
+    print(calculate_tokens(assistant_response))
 
     # Add the assistant's response to the conversation history
     conversation_history.append({"role": "assistant", "content": assistant_response})
@@ -74,37 +65,80 @@ def get_response(user_query):
     return assistant_response
 
 
-
-
-
 def extract_zipfile(zip_file_path = "badcode.zip"): 
     temp_dir = os.path.join(currDir, "extractedFiles/")
     code_snippets = extractJStoString(zip_file_path, temp_dir, False)
     deleteExtractedFiles(temp_dir)
     return code_snippets
-
-def get_zipfile_query(extracted_code):
-    return '''View this submission and generate a code review report 
-         based on the following code snippets:\n {trial_code}.\n 
-         Use the line number beside the code as a reference to point out the code smells.
          
-         '''.format(trial_code=extracted_code)
+         
+def get_file_extract_response(extracted_codes):
+    all_code_list = extracted_codes.split(extract_endline)
+    filtered_code_list = [s for s in all_code_list if s.strip() != ""]
+    response = ""
+    for code in filtered_code_list:
+        user_query = get_user_query(code)
+        response += get_response(user_query)
+    return response
+
+def get_all_extract_response(extracted_codes):
+    user_query = get_user_query(extracted_codes)
+    return get_response(user_query)
+
+def save_response(response, zipFilePath):
+    save_file = save_file_name_format(model_name, zipFilePath)
+    if save_file == "":
+        return False
+    return save_output(output_dir, save_file, response)
+   
     
+    
+def zipfileChoice():
+    zipFilePath = input("Enter the zip file path: ")
+    extracted_codes = extract_zipfile(zip_file_path = zipFilePath)
+    total_tokens = calculate_tokens(extracted_codes)
+    print("The total number of tokens in the extracted code is: ", total_tokens)
+    while True:
+        user_input = input("Choose among the following options:\n1. Sent all code snippets at once\n" +
+                           "2. Send code snippets one by one\n" +
+                           "3. Send code snippets based on directory\n" +
+                           "4. Go back to the previous menu.\n" +
+                           "You: ")
+        response = ""
+        match user_input:
+            case "1":
+                response = get_all_extract_response(extracted_codes)
+                if(save_response(response, zipFilePath)):
+                    break
+            case "2":
+                response = get_file_extract_response(extracted_codes)
+                if(save_response(response, zipFilePath)):
+                    break
+            case "3":
+                print("Not implemented yet.")
+            case "4": 
+                print("Going back to the previous menu...")
+                break
+            case _:
+                print("Invalid choice. Please try again.")
+
     
 if __name__ == "__main__":
+    print("Welcome to the code smell detection chatbot!\nCurrently using {chatgpt_model} model."
+          .format(chatgpt_model=model_name))
+    print(output_dir)
+    make_dir(output_dir)
     while True:
-        user_input = input("Choose among the following options:\n1. Submit zip file\n2. Ask chatbot a question\n3. Exit the program\nYou: ")
+        user_input = input("Choose among the following options:\n" +
+                           "1. Submit zip file\n" +
+                           "2. Ask chatbot a question\n" +
+                           "3. Refresh conversation\n" +
+                           "4. Exit the program\n" +
+                           "You: ")
         match user_input:
             case "1":
                 try:
-                    zipFilePath = input("Enter the zip file path: ")
-                    extracted_codes = extract_zipfile(zip_file_path = zipFilePath)
-                    user_query = get_zipfile_query(extracted_codes)
-                    response = get_response(user_query)
-                    save_file = "FinalOutput-{zipfile}-continue-{model}.md".format(zipfile = zipFilePath[:-4], model=model_name)
-                    with open(save_file, "w") as text_file:
-                        text_file.write(response)
-                    print("Added code review in {save_file}".format(zipfile = zipFilePath[:-4], save_file=save_file))
+                    zipfileChoice()
                 except Exception as e:
                     print(f"An error occurred: {e}")
             case "2":
@@ -116,6 +150,9 @@ if __name__ == "__main__":
                     response = get_response(user_input)
                     print(f"Assistant: {response}")
             case "3":
+                print("Refreshing context...")
+                conversation_history = [system_role,]
+            case "4":
                 print("Exiting the program...")
                 break
             case _:
