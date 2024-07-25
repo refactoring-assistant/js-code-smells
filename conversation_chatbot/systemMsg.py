@@ -21,6 +21,10 @@ def system_message():
         - Found in line no. -
         - Possible solution -
         
+        Generate a report for every file that you see. If a file does not have any code smells,
+        then mention the file looks good to you with no code smells. At the end of the report
+        add the number of files processed to generate the report.
+        
         If you are not asked to generate a report, answer the question normally to the user.
         '''.format(smell_list=list_code_smells)
     }
@@ -34,6 +38,7 @@ def get_user_query(extracted_code):
          which code smell is more important to fix first.
          Ensure that the filename for each file is included in the report.
          '''.format(trial_code=extracted_code)
+         
 
 def endline_break():
     return "\n--------------------------------------------------------------------------------------------\n"
