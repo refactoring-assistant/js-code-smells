@@ -51,8 +51,8 @@ def choose_model():
 
 if __name__ == '__main__':
     # Define the path to the folder containing the markdown files
-    folder_path = os.path.join(os.getcwd(), "FinalOutput_nancy_examples_continue_gpt-4o_2024-07-18_22-40-07.md")
+    folder_path = os.path.join(os.getcwd(), "chatgpt_outputs\FinalOutput_nancy_examples_continue_gpt-4o_get_all_extract_response_2024-07-24_23-55-45.md")
     # Read the content of the markdown files
     content = read_markdown_folder(folder_path)
-    conv_history =[{"role": "user", "content": content}]
-    print(calculate_tokens(conv_history))
+    # conv_history =[{"role": "user", "content": content}]
+    print(calculate_tokens(content))

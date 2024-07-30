@@ -1,4 +1,5 @@
 import os
+import sys
 from decouple import config
 from openai import OpenAI
 from fine_tuning_trials.code_smells_list import code_smells
@@ -23,13 +24,11 @@ currDir = os.getcwd()
 output_dir = os.path.join(currDir, "chatgpt_outputs")
 extract_endline = endline_break()
 
-system_role = system_message()
-
 # Initialize the conversation with a system message
-conversation_history = [
-    system_role,
-]
-        
+conversation_history = []     
+system_role = system_message("default")
+system_message_type = ""
+user_code_smell = "all"
 
 
 def get_response(user_query, save_user_response = False):
@@ -66,7 +65,8 @@ def extract_zipfile(zip_file_path = "badcode.zip"):
        
 def get_all_extract_response(extracted_codes):
     print("All extract response processing...")
-    user_query = get_user_query(extracted_codes)
+    print("Code Smell: ", user_code_smell)
+    user_query = get_user_query(system_message_type, extracted_codes, user_code_smell)
     return get_response(user_query, False)
   
 def get_file_extract_response(extracted_codes):
@@ -75,7 +75,7 @@ def get_file_extract_response(extracted_codes):
     filtered_code_list = [s for s in all_code_list if s.strip() != ""]
     response = ""
     for code in filtered_code_list:
-        user_query = get_user_query(code)
+        user_query = get_user_query(system_message_type, code, user_code_smell)
         response += get_response(user_query, False)
     return response
 
@@ -94,6 +94,7 @@ def save_response(response, zipFilePath, additional_info = ""):
     save_file = save_file_name_format(model_name, zipFilePath, additional_info)
     if save_file == "":
         return False
+    print(output_dir)
     return save_output(output_dir, save_file, response)
 
 def conversation_extract_single_file():
@@ -106,13 +107,10 @@ def conversation_extract_single_file():
         if(extracted_code == ""):
             print("File extraction failed. Please try again.")
             continue
-        user_input = get_user_query(extracted_code)
+        user_input = get_user_query(system_message_type, extracted_code, user_code_smell)
         return user_input
-    
-    
-def zipfileChoice():
-    zipFilePath = input("Enter the zip file path: ")
-    extracted_codes = extract_zipfile(zip_file_path = zipFilePath)
+
+def zip_all_smells_together(zipFilePath ,extracted_codes):
     total_tokens = calculate_tokens(extracted_codes)
     print("The total number of tokens in the extracted code is: ", total_tokens)
     while True:
@@ -135,6 +133,34 @@ def zipfileChoice():
                 break
             case _:
                 print("Invalid choice. Please try again.")
+
+def individual_code_smell(zipFilePath, extracted_codes):
+    global user_code_smell
+    for code_smell_type in list_code_smells:
+        response = ""
+        code_smell_type_list = list(code_smell_type.values())[0]
+        for code_smell in code_smell_type_list:
+            global output_dir
+            
+            user_code_smell = code_smell
+            response += get_all_extract_response(extracted_codes)
+            code_smell = code_smell.replace(" ", "_")
+            output_dir = os.path.join(currDir, "chatgpt_outputs")
+            output_dir = os.path.join(output_dir, code_smell)
+            save_response(response, zipFilePath, code_smell)
+                
+    
+    
+def zipfileChoice():
+    zipFilePath = input("Enter the zip file path: ")
+    extracted_codes = extract_zipfile(zip_file_path = zipFilePath)
+    
+    match system_message_type:
+        case "default":
+            zip_all_smells_together(zipFilePath, extracted_codes)
+        case "each_code_smell":
+            individual_code_smell(zipFilePath, extracted_codes)
+    
                 
 def user_chatbot_conversation():
     while True:
@@ -161,15 +187,33 @@ def model_choice_command():
     print("Currently using {chatgpt_model} model."
           .format(chatgpt_model=model_name))
 
-def referesh_conversation_choice():
+def set_conversation_choice(system_role, refresh_context = False):
     global conversation_history
-    print("Refreshing context...")
+    if refresh_context: print("Refreshing context...")
     conversation_history = [system_role,]
+
     
 if __name__ == "__main__":
+    print("Sys args", sys.argv)
+    if len(sys.argv) == 1: system_message_type = "default"
+    if len(sys.argv) > 2: print("Invalid number of arguments. Using default system message.")
+    if len(sys.argv) == 2: system_message_type = sys.argv[1]
+    print(system_message_type)
+    system_role = system_message(system_message_type)
+    set_conversation_choice(system_role)
+
     print("Welcome to the code smell detection chatbot!")
     model_choice_command()
-    make_dir(output_dir)
+    if system_message_type == "each_code_smell":
+        for code_smell_type in list_code_smells:
+            code_smell_type_list = list(code_smell_type.values())[0]
+            for code_smell in code_smell_type_list:
+                code_smell = code_smell.replace(" ", "_")
+                output_dir = os.path.join(currDir, "chatgpt_outputs")
+                output_dir = os.path.join(output_dir, code_smell)
+                make_dir(output_dir)
+    else :
+        make_dir(output_dir)
     while True:
         user_input = input("Choose among the following options:\n" +
                            "1. Submit zip file\n" +
@@ -190,11 +234,11 @@ if __name__ == "__main__":
                 except Exception as e:
                     print(f"An error occurred: {e}")
             case "3":
-                referesh_conversation_choice()
+                set_conversation_choice(system_role, True)
             case "4":
                 print("Switching model...")
                 model_choice_command()
-                referesh_conversation_choice()
+                set_conversation_choice(system_role, True)
             case "5":
                 print("Exiting the program...")
                 break

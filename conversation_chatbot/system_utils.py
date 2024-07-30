@@ -20,6 +20,7 @@ def save_file_name_format(model_name, zipFilePath, additional_info):
         return save_file
     except Exception as e:
         print(f"An error occurred in saving file name: {e}")
+        print("Aborting process...")
         return ""
 
 def save_output(output_dir, save_file, response):
@@ -38,6 +39,9 @@ def save_output(output_dir, save_file, response):
     
 def extract_single_file(file_path):
     try:
+        if not file_path.endswith(".js"):
+            print("File is not a javascript file. Please upload a javascript file.")
+            return ""
         with open(file_path, 'r') as f:
             content = f.read()
         return content
