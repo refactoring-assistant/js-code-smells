@@ -29,6 +29,7 @@ conversation_history = []
 system_role = system_message("default")
 system_message_type = ""
 user_code_smell = "all"
+output_path = "chatgpt_outputs"
 
 
 def get_response(user_query, save_user_response = False):
@@ -136,16 +137,16 @@ def zip_all_smells_together(zipFilePath ,extracted_codes):
 
 def individual_code_smell(zipFilePath, extracted_codes):
     global user_code_smell
+    
     for code_smell_type in list_code_smells:
         response = ""
         code_smell_type_list = list(code_smell_type.values())[0]
         for code_smell in code_smell_type_list:
             global output_dir
-            
             user_code_smell = code_smell
             response += get_all_extract_response(extracted_codes)
             code_smell = code_smell.replace(" ", "_")
-            output_dir = os.path.join(currDir, "chatgpt_outputs")
+            # output_dir = os.path.join(currDir, output_path)
             output_dir = os.path.join(output_dir, code_smell)
             save_response(response, zipFilePath, code_smell)
                 
@@ -204,12 +205,15 @@ if __name__ == "__main__":
 
     print("Welcome to the code smell detection chatbot!")
     model_choice_command()
+    output_path = input("Enter the output path: ")
+    if output_path == "": output_path = "chatgpt_outputs"
+    output_dir = os.path.join(currDir, output_path)
     if system_message_type == "each_code_smell":
         for code_smell_type in list_code_smells:
             code_smell_type_list = list(code_smell_type.values())[0]
             for code_smell in code_smell_type_list:
                 code_smell = code_smell.replace(" ", "_")
-                output_dir = os.path.join(currDir, "chatgpt_outputs")
+                output_dir = os.path.join(currDir, output_path)
                 output_dir = os.path.join(output_dir, code_smell)
                 make_dir(output_dir)
     else :
