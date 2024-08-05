@@ -1,19 +1,19 @@
 # List of code smells to be used in the code review report.
 code_smells_list = [
     {
-        "Bloaters": [{"Long Method", "Primitive Obsession", "Long Parameter List", "Data Clumps", "Large Class"}]
+        "Bloaters": ["Long Method", "Primitive Obsession", "Long Parameter List", "Data Clumps", "Large Class"]
     },
     {
-        "Object-Orientation Abusers": [{"Switch Statements", "Temporary Field", "Refused Bequest", "Alternative Classes with Different Interfaces"}]
+        "Object-Orientation Abusers": ["Switch Statements", "Temporary Field", "Refused Bequest", "Alternative Classes with Different Interfaces"]
     },
     {
-        "Change Preventers": [{"Divergent Change", "Shotgun Surgery", "Parallel Inheritance Hierarchies"}]
+        "Change Preventers": ["Divergent Change", "Shotgun Surgery", "Parallel Inheritance Hierarchies"]
     },
     {
-        "Dispensables": [{"Lazy Class", "Data Class", "Duplicate Code", "Speculative Generality", "Dead Code", "Comments"}]
+        "Dispensables": ["Lazy Class", "Data Class", "Duplicate Code", "Speculative Generality", "Dead Code", "Comments"]
     },
     {
-        "Couplers": [{"Feature Envy", "Inappropriate Intimacy", "Message Chains", "Middle Man", "Incomplete Library Class"}]
+        "Couplers": ["Feature Envy", "Inappropriate Intimacy", "Message Chains", "Middle Man", "Incomplete Library Class"]
     }
     ]
 
