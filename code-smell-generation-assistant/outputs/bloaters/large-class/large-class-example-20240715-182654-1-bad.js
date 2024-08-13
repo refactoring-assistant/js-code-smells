@@ -1,4 +1,3 @@
-// AI-generated code smell for Large-Class
 class ProductManager {
   constructor() {
     this.products = [];

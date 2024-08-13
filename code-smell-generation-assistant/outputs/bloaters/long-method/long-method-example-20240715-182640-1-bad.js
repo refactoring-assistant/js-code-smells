@@ -1,4 +1,3 @@
-// AI-generated code smell for Long-Method
 function analyzeData(data) {
     let sum = 0;
     for (let i = 0; i < data.length; i++) {

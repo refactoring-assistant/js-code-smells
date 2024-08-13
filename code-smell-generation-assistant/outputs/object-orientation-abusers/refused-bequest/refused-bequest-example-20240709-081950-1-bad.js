@@ -1,4 +1,3 @@
-// AI-generated code smell for Refused-Bequest
 class Car {
     constructor() {
         this.numWheels = 4;

@@ -1,4 +1,3 @@
-// AI-generated code smell for Long-Method
 class MusicManager {
     constructor() {
       this.musicCollection = [];

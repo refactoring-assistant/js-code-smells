@@ -1,4 +1,3 @@
-// AI-generated code smell for Middle-Man
 class UserService {
 
   constructor() {

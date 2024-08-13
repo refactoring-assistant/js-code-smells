@@ -1,4 +1,3 @@
-// AI-generated code smell for Switch-Statements
 function performAction(action) {
   switch (action) {
     case 'create':

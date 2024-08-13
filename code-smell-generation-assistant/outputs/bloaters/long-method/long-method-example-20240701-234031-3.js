@@ -1,4 +1,3 @@
-// AI Generated Long Method Example 3
 function checkInputs(form) {
   const usernameInput = form.elements['username'];
   const passwordInput = form.elements['password'];

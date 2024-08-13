@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Clumps
 function shippingInfo(firstName, lastName, addressOne, cityOne, countryOne, postalOne) {
   console.log(
     `Shipping to ${firstName} ${lastName} at ${addressOne}, ${cityOne}, ${countryOne}, ${postalOne}`

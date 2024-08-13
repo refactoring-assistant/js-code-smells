@@ -1,4 +1,3 @@
-// AI-generated code smell for Comments
 class Calculator {
   // Method to add two numbers
   add(a, b) {

@@ -1,4 +1,3 @@
-// AI-generated code smell for Long-Parameter-List
 function createPerson(firstName, lastName, age, address, phoneNumber, email, occupation, maritalStatus) {
   const person = {
     firstName: firstName,

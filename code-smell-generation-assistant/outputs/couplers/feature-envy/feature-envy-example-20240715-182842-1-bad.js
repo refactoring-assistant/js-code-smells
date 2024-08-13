@@ -1,4 +1,3 @@
-// AI-generated code smell for Feature-Envy
 class Airplane {
     constructor(make, model, flightHours){
         this.make = make;

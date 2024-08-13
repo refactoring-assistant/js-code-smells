@@ -1,5 +1,3 @@
-// AI Generated Duplicate Code Example
-
 function login(username, password) {
   if (!username || username.length < 5) {
     return 'Username must be at least 5 characters long.';

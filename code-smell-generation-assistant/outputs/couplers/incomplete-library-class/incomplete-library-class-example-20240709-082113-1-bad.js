@@ -1,4 +1,3 @@
-// AI-generated code smell for Incomplete-Library-Class
 class MathLib {
   add(a, b) {
     return a + b;

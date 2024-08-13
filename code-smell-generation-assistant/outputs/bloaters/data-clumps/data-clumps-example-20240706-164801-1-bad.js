@@ -1,5 +1,3 @@
-// AI-generated code smell for Data-Clumps
-
 function createCustomer(firstName, lastName, street, city, state, zip, email, phone) {
     console.log(`Creating customer ${firstName} ${lastName} with address ${street}, ${city}, ${state}, ${zip} and contact details ${email} and ${phone}.`);
 }

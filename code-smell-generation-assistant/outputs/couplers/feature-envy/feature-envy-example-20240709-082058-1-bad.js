@@ -1,4 +1,3 @@
-// AI-generated code smell for Feature-Envy
 class Location {
   constructor(address, city, country) {
     this.address = address;

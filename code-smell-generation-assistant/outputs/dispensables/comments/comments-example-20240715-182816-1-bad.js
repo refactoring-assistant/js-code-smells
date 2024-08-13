@@ -1,4 +1,3 @@
-// AI-generated code smell for Comments
 function fetchData() {
   // create variable request
   var request = new XMLHttpRequest(); 

@@ -1,4 +1,3 @@
-// AI-generated code smell for Speculative-Generality.
 class Animal {
   constructor(name) {
     this.name = name;

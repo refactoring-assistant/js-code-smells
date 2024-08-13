@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Class
 class CustomerData {
   constructor(name, email) {
     this.name = name;

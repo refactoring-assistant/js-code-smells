@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Class
 class EmployeeData {
   constructor(name, age, position) {
     this.name = name;

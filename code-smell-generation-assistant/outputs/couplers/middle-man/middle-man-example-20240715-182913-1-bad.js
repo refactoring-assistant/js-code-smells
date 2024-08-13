@@ -1,5 +1,3 @@
-// AI-generated code smell for Middle-Man
-
 class Customer {
     constructor(bank) {
         this.bank = bank;

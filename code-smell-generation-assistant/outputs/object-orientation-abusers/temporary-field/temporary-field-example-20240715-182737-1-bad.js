@@ -1,4 +1,3 @@
-// AI-generated code smell for Temporary-Field
 class ShoppingCart {
     constructor() {
         this.items = [];

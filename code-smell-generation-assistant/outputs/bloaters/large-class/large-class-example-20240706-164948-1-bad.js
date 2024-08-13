@@ -1,5 +1,4 @@
 
-// AI-generated code smell for Large-Class
 class GroceryStore {
     constructor() {
       this.products = [];

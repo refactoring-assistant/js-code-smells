@@ -1,4 +1,3 @@
-// AI Generated Comments Example
 // This function calculates the sum of two numbers
 function sum(a, b) {
   // First, we add the two parameters together

@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Clumps
 function bookFlight (firstName, lastName, address, city, state, zipCode, destination, departureDate, returnDate) {
    console.log(`Booking flight for ${firstName} ${lastName} to ${destination} departing on ${departureDate} and returning on ${returnDate}.`);
 }

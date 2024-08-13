@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Clumps
 let userFirstName = 'John';
 let userLastName = 'Doe';
 let userEmail = 'john.doe@example.com';

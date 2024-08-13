@@ -1,4 +1,3 @@
-// AI-generated code smell for Parallel-Inheritance-Hierarchies
 class Employee {
     constructor(name, id) {
         this.name = name;

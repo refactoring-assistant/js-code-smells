@@ -1,5 +1,3 @@
-// AI-generated code smell for Switch-Statements
-
 function processRequest(request) {
     switch (request.type) {
         case 'create':

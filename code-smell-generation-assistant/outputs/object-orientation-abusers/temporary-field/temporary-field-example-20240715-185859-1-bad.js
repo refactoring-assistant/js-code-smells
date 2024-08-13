@@ -1,4 +1,3 @@
-// AI-generated code smell for Temporary-Field
 class ImageProcessor {
   constructor() {
     this.imageData = null;  // Temporary field used only in some methods 

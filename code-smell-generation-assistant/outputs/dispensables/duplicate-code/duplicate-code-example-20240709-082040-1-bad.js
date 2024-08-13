@@ -1,5 +1,3 @@
-// AI-generated code smell for Duplicate-Code
-
 function calculatePrice(productPrice, qty) {
     let totalPrice = productPrice * qty;
     let vat = totalPrice * 0.15;

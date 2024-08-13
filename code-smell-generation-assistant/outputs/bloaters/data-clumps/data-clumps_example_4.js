@@ -1,4 +1,3 @@
-// AI Generated Example 3
 function registerVehicle(ownerName, plateNumber, model, color, year, vin) {
   console.log(`Registering vehicle for ${ownerName}: ${plateNumber}, ${model}, ${color}, ${year}, ${vin}`);
 }

@@ -1,4 +1,3 @@
-// AI-generated code smell for Inappropriate-Intimacy
 class User {
     constructor(username, password){
         this.username = username;

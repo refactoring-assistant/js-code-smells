@@ -1,4 +1,3 @@
-// AI Generated Comments Example
 // Defining a function to check if the input number is Even or Odd
 function checkEvenOrOdd (num) { 
   // if number is divisible by 2, it is even

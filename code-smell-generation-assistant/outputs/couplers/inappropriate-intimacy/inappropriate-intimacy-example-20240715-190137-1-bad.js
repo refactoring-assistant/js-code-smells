@@ -1,4 +1,3 @@
-// AI-generated code smell for Inappropriate-Intimacy
 class UserConfig {
     constructor() {
         this.config = {

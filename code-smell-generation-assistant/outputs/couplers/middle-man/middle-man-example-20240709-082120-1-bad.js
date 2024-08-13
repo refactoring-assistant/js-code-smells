@@ -1,4 +1,3 @@
-// AI-generated code smell for Middle-Man
 class Customer {
     getDiscount() {
         return this.order.getDiscount();

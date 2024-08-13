@@ -1,4 +1,3 @@
-// AI Generated Long Parameter List Example
 function updateEmployeeProfile(id, name, age, address, email, phoneNo, department, jobRole, salary, bonus, hireDate) {
     employeeRecords.id = id;
     employeeRecords.name = name;

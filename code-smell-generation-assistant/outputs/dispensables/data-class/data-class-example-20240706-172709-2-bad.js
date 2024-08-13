@@ -1,5 +1,3 @@
-// AI-generated code smell for Data-Class 
-
 class Order {
   constructor(orderId, product, quantity) {
     this.orderId = orderId;

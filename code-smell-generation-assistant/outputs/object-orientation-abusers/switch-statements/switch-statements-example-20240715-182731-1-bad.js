@@ -1,4 +1,3 @@
-// AI-generated code smell for Switch-Statements
 function getColorName(code) {
     switch (code) {
         case "#FF0000":

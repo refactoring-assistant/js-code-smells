@@ -1,4 +1,3 @@
-// AI-generated code smell for Long-Method
 function userRegistration(username, password, email, firstName, lastName, dob, address, zip, country, phoneNumber, securityQuestion, securityAnswer) {
   if( username === '') {
     console.log('username is required');

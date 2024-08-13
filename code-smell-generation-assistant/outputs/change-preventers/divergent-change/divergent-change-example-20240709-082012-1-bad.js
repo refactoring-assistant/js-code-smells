@@ -1,4 +1,3 @@
-// AI-generated code smell for Divergent-Change
 class Product {
     constructor(id, name, price, quantity, author, pages, color, size) {
         this.id = id;

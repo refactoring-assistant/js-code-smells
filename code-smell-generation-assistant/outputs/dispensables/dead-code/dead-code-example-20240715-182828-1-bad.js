@@ -1,4 +1,3 @@
-// AI-generated code smell for Dead-Code
 function myFunction() {
     let x = 3;
     x = 4; // dead-code: x is declared and immediately re-declared without being used

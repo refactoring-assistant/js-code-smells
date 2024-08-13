@@ -1,5 +1,3 @@
-// AI-generated code smell for Data-Class
-
 class Vehicle {
   constructor(make, model, year) {
     this.make = make;

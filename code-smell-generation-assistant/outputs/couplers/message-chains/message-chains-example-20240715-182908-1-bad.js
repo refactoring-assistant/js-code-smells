@@ -1,4 +1,3 @@
-// AI-generated code smell for Message-Chains
 class User {
     constructor(name) {
         this.name = name;

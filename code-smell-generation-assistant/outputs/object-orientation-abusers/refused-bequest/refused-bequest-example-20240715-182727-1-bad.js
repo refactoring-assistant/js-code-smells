@@ -1,4 +1,3 @@
-// AI-generated code smell for Refused-Bequest
 class Product {
     constructor(name) {
         this.name = name;

@@ -1,4 +1,3 @@
-// AI-generated code smell for Long-Parameter-List
 function processStudentData(studentId, firstName, lastName, grade1, grade2, grade3, grade4, grade5, address1, address2, city, state, zipcode) {
     const studentData = {
         id: studentId,

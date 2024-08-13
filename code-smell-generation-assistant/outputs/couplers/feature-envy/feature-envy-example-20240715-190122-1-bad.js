@@ -1,4 +1,3 @@
-// AI-generated code smell for Feature-Envy
 class User {
   constructor(name) {
     this.name = name;

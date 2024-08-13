@@ -1,4 +1,3 @@
-// AI-generated code smell for Primitive-Obsession
 var user = {
   name: "John",
   age: 25,

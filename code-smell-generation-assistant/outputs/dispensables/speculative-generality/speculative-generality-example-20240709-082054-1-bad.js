@@ -1,5 +1,3 @@
-// AI-generated code smell for Speculative-Generality
-
 // A class that is too general and anticipates future requirements
 class Shape {
     constructor(x, y) {

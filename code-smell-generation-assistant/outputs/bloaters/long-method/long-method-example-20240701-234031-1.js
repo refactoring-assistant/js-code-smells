@@ -1,4 +1,3 @@
-// AI Generated Long Method Example 1
 function calculatePayment(principal, years, rate) {
   if (principal == null || years == null || rate == null) {
     return;

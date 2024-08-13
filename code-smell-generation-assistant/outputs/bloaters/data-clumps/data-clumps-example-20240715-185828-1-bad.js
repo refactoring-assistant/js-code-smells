@@ -1,4 +1,3 @@
-// AI-generated code smell for Data-Clumps
 function createUser(username, password, email, address, phone) {
   let user = {};
   user.username = username;

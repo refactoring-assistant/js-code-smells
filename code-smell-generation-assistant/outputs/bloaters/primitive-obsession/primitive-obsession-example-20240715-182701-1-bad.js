@@ -1,4 +1,3 @@
-// AI-generated code smell for Primitive-Obsession
 const orders = [];
 let orderID = 1;
 

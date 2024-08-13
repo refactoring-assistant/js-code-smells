@@ -1,4 +1,4 @@
-// AI-generated code smell for Shotgun-Surgery
+
 class User {
     constructor(name, age, email) {
         this.name = name;

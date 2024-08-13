@@ -1,4 +1,3 @@
-// AI-generated code smell for Message-Chains
 class Employee {
   constructor(name, age) {
     this.personalData = {

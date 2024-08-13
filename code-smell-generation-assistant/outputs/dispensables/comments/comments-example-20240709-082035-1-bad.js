@@ -1,5 +1,3 @@
-// AI-generated code smell for Comments
-
 function fibonacci(n) {
     // The function calculates the Fibonacci series
     // The Fibonacci series starts with 0 and 1

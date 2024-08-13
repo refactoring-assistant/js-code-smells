@@ -1,4 +1,3 @@
-// AI Generated Long Parameter List Example
 function drawRectangle(canvasContext, x1, y1, x2, y2, fillColor, strokeColor, lineWidth, lineJoin, lineCap, shadowColor, shadowBlur, shadowOffsetX, shadowOffsetY) {
     canvasContext.fillStyle = fillColor;
     canvasContext.strokeStyle = strokeColor;

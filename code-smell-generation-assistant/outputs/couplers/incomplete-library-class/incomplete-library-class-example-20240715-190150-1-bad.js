@@ -1,4 +1,3 @@
-// AI-generated code smell for Incomplete-Library-Class
 class DatabaseManager {
   constructor(host, username, password) {
     this.host = host;

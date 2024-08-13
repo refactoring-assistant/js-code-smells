@@ -1,5 +1,3 @@
-// AI Generated Primitive Obsession Example
-
 function getUserFullName(user) {
   const firstName = user[0];
   const lastName = user[1];

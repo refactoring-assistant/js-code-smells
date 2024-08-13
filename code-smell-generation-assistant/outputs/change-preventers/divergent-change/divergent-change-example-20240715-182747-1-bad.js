@@ -1,4 +1,3 @@
-// AI-generated code smell for Divergent-Change
 class Order {
     constructor(customer, details) {
         this.customer = customer;

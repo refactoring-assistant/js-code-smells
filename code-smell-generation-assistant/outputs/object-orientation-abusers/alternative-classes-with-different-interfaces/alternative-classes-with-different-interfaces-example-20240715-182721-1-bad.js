@@ -1,5 +1,3 @@
-// AI-generated code smell for Alternative-Classes-With-Different-Interfaces
-
 class Car {
   startEngine() {
     // code to start the engine

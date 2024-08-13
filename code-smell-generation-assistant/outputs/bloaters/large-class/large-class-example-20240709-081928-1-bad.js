@@ -1,4 +1,3 @@
-// AI-generated code smell for Large-Class
 class LargeClass {
     constructor() { 
         this.property1 = '';

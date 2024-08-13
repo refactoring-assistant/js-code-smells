@@ -1,4 +1,3 @@
-// AI-generated code smell for Primitive-Obsession
 let user = {
     first_name: "John",
     last_name: "Doe",

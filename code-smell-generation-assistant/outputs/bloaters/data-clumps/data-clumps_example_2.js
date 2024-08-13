@@ -1,4 +1,3 @@
-// AI Generated Example 1
 function getUserDetails(id, name, email, city, state, zip) {
   console.log(`Fetching details for user: ${id}, ${name}, ${email}, ${city}, ${state}, ${zip}`);
 }

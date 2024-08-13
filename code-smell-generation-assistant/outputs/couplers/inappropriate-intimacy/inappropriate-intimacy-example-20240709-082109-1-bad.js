@@ -1,5 +1,3 @@
-// AI-generated code smell for Inappropriate-Intimacy
-
 class Account {
     constructor(id, username, password, profile) {
         this.id = id;

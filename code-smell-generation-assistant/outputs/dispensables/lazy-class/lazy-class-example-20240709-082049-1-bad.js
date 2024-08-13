@@ -1,4 +1,3 @@
-// AI-generated code smell for Lazy-Class
 class Greeting{
   constructor(message){
       this.message = message;

@@ -1,4 +1,3 @@
-// AI-generated code smell for Lazy-Class
 class MathOperations {
     constructor(number1, number2) {
         this.number1 = number1;

@@ -1,5 +1,3 @@
-// AI Generated Primitive Obsession Example
-
 class Circle {
   constructor(radius) {
     this.radius = radius;

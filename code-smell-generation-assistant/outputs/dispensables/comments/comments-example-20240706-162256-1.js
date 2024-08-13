@@ -1,4 +1,3 @@
-// AI Generated Comments Example
 function findTriangleArea(base, height) {
   // This is the base of our triangle
   let triangleBase = base;

@@ -1,4 +1,3 @@
-// AI Generated Long Parameter List Example
 function arrayManipulator(array, index, newValue, action, validationValue, validationAction, isNumber, isArray, callbackFunction) {
     if(validationAction(validationValue) && isNumber(index) && isArray(array)) {
         if(action === "add") {

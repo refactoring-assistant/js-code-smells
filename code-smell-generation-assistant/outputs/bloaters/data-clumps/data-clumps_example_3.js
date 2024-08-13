@@ -1,4 +1,3 @@
-// AI Generated Example 2
 function shipProduct(customerName, productName, street, city, state, zip) {
   console.log(`Shipping product ${productName} to ${customerName} at ${street}, ${city}, ${state}, ${zip}`);
 }

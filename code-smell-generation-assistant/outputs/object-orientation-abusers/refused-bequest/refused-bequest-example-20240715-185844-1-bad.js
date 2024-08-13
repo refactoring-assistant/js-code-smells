@@ -1,4 +1,3 @@
-// AI-generated code smell for Refused-Bequest
 class Media {
   constructor(name, duration, creator){
     this.name = name;

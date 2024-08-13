@@ -1,5 +1,3 @@
-// AI Generated Primitive Obsession Example
-
 const isValidPassword = (password) => {
   const length = password.length;
   const hasSpecialCharacter = /[!@#$%^&*]/.test(password);
