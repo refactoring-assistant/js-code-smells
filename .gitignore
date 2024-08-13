@@ -133,7 +133,7 @@ dist
 .vscode/
 
 # openai virtual environment
-code-smell-assistant/openai-env/
+code-smell-generation-assistant/openai-env/
 
 #miscellaneous
 *.DS_Store
