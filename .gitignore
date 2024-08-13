@@ -137,3 +137,9 @@ code-smell-assistant/openai-env/
 
 #miscellaneous
 *.DS_Store
+
+# ignore pycache
+__pycache__/
+
+#ignore virtual env
+venv/
