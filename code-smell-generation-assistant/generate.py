@@ -119,7 +119,7 @@ def create_prompt(code_smell, num_examples, examples_text):
             smell examples, which should follow this format:
 
             ~~~{PROGRAMMING_LANGUAGE.lower()}
-            // AI-generated code smell for {code_smell.title()}
+            // Example Code Smell
             <code_snippet>
             ~~~
 
@@ -138,11 +138,11 @@ def normalize_code_smell_examples(raw_examples):
     examples = []
     for example in raw_examples:
         example = example.strip().replace("~~~", "").strip()
-        if example and "AI-generated code smell for" in example:
+        if example and "Example Code Smell" in example:
             code_snippet = example.split('\n')
             clean_code = []
             for line in code_snippet:
-                if line.startswith('// AI-generated code smell for') or line.strip().startswith('}'):
+                if line.startswith('// Example Code Smell') or line.strip().startswith('}'):
                     clean_code.append(line)
                 elif not line.startswith('//'):
                     clean_code.append(line)
