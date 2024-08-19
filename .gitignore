@@ -132,6 +132,12 @@ dist
 # VS code
 .vscode/
 
+# openai virtual environment
+code-smell-generation-assistant/openai-env
+
+#miscellaneous
+*.DS_Store
+
 # ignore pycache
 __pycache__/
 
