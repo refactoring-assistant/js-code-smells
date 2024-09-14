@@ -44,5 +44,5 @@ class User {
 
 let userAccount = new Account(1, 'test', 'password', new Profile('Jane', 30, 'test@email.com'));
 let user = new User(userAccount);
-console.log(user.getUserProfile().getAge()); // Inappropriate intimacy: User class is too dependent on Account and Profile classes
-user.updateUserProfile(new Profile('Jane', 31, 'test@email.com'));  // Inappropriate intimacy: User class access Profile directly
+console.log(user.getUserProfile().getAge());
+user.updateUserProfile(new Profile('Jane', 31, 'test@email.com'));

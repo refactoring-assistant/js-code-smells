@@ -1,96 +1,95 @@
 class Add {
-    constructor(addend1, addend2) {
-        this.addend1 = addend1;
-        this.addend2 = addend2;
-    }
+  constructor(addend1, addend2) {
+    this.addend1 = addend1;
+    this.addend2 = addend2;
+  }
 
-    displayAddition() {
-        return `${this.addend1} + ${this.addend2}`;
-    }
+  calculate() {
+    return this.addend1 + this.addend2;
+  }
 
-    displayAdditionSymbol() {
-        return `+`;
-    }
+  showSymbol() {
+    return '+';
+  }
 
-    addAddends() {
-        return this.addend1 + this.addend2;
-    }
+  displayOperation() {
+    return `${this.addend1} + ${this.addend2}`;
+  }
 }
 
 class Subtract {
-    constructor(subtrahend, minuend) {
-        this.subtrahend = subtrahend;
-        this.minuend = minuend;
-    }
+  constructor(minuend, subtrahend) {
+    this.minuend = minuend;
+    this.subtrahend = subtrahend;
+  }
 
-    displaySubtraction() {
-        return `${this.subtrahend} - ${this.minuend}`;
-    }
+  performSubtraction() {
+    return this.minuend - this.subtrahend;
+  }
 
-    displaySubtractionSymbol() {
-        return `-`;
-    }
+  getSymbol() {
+    return '-';
+  }
 
-    subtractSubtrahendMinuend() {
-        return this.subtrahend - this.minuend;
-    }
+  operationDetails() {
+    return `${this.minuend} - ${this.subtrahend}`;
+  }
 }
 
 class Multiply {
-    constructor(factor1, factor2) {
-        this.factor1 = factor1;
-        this.factor2 = factor2;
-    }
+  constructor(factor1, factor2) {
+    this.factor1 = factor1;
+    this.factor2 = factor2;
+  }
 
-    displayMultiplication() {
-        return `${this.factor1} * ${this.factor2}`;
-    }
+  executeMultiplication() {
+    return this.factor1 * this.factor2;
+  }
 
-    displayMultiplicationSymbol() {
-        return `*`;
-    }
+  multiplicationSymbol() {
+    return '*';
+  }
 
-    multiplyFactors() {
-        return this.factor1 * this.factor2;
-    }
+  multiplicationInfo() {
+    return `${this.factor1} * ${this.factor2}`;
+  }
 }
 
 class Divide {
-    constructor(dividend, divisor) {
-        this.dividend = dividend;
-        this.divisor = divisor;
-    }
+  constructor(dividend, divisor) {
+    this.dividend = dividend;
+    this.divisor = divisor;
+  }
 
-    displayDivision() {
-        return `${this.dividend} / ${this.divisor}`;
-    }
+  calculateQuotient() {
+    return this.dividend / this.divisor;
+  }
 
-    displayDivisionSymbol() {
-        return `/`;
-    }
+  divisionSymbol() {
+    return '/';
+  }
 
-    divideDividenDivisor() {
-        return this.dividend / this.divisor;
-    }
+  showDivision() {
+    return `${this.dividend} / ${this.divisor}`;
+  }
 }
 
-let add = new Add(1, 2);
-console.log(add.displayAddition());
-console.log(add.displayAdditionSymbol());
-console.log(add.addAddends());
+let add = new Add(5, 3);
+console.log(add.displayOperation());
+console.log(add.showSymbol());
+console.log(add.calculate());
 
-let subtract = new Subtract(2, 1);
-console.log(subtract.displaySubtraction());
-console.log(subtract.displaySubtractionSymbol());
-console.log(subtract.subtractSubtrahendMinuend());
+let subtract = new Subtract(10, 5);
+console.log(subtract.operationDetails());
+console.log(subtract.getSymbol());
+console.log(subtract.performSubtraction());
 
-let multiply = new Multiply(2, 3);
-console.log(multiply.displayMultiplication());
-console.log(multiply.displayMultiplicationSymbol());
-console.log(multiply.multiplyFactors());
+let multiply = new Multiply(4, 7);
+console.log(multiply.multiplicationInfo());
+console.log(multiply.multiplicationSymbol());
+console.log(multiply.executeMultiplication());
 
-let divide = new Divide(6, 2);
-console.log(divide.displayDivision());
-console.log(divide.displayDivisionSymbol());
-console.log(divide.divideDividenDivisor());
-
+let divide = new Divide(20, 5);
+console.log(divide.showDivision());
+console.log(divide.divisionSymbol());
+console.log(divide.calculateQuotient());

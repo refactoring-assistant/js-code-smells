@@ -15,7 +15,7 @@ class ShoppingCart {
   totalPrice() {
     if (this.tempDiscount !== null) {
       let total = this.items.reduce((prev, cur) => prev + cur.price, 0);
-      return total - (total * (this.tempDiscount / 100));
+      return total - total * (this.tempDiscount / 100);
     } else {
       return this.items.reduce((prev, cur) => prev + cur.price, 0);
     }

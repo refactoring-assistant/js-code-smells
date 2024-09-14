@@ -1,29 +1,57 @@
 class Car {
-    constructor() {
-        this.numWheels = 4;
-    }
+  constructor() {
+    this.numWheels = 4;
+    this.hasAirConditioning = true;
+  }
 
-    drive() {
-        console.log('Driving...');
-    }
+  drive() {
+    console.log('Driving a car...');
+  }
 
-    park() {
-        console.log('Parking...');
-    }
+  park() {
+    console.log('Parking a car...');
+  }
+
+  turnOnAirConditioning() {
+    console.log('Turning on air conditioning...');
+  }
+
+  openTrunk() {
+    console.log('Opening car trunk...');
+  }
 }
 
 class Motorbike extends Car {
-    constructor() {
-        super();
-        this.numWheels = 2; // Refused the bequest of numWheels from the Car class
-    }
+  constructor() {
+    super();
+    this.numWheels = 2;
+  }
 
-    // Does not use the drive and park methods from Car, effectively refusing the bequest
-    drive() {
-        console.log('Motorbike driving...');
-    }
+  drive() {
+    console.log('Riding a motorbike...');
+  }
 
-    park() {
-        console.log('Motorbike parking...');
-    }
+  park() {
+    console.log('Parking a motorbike...');
+  }
+
+  turnOnAirConditioning() {
+    console.log("Motorbikes don't have air conditioning.");
+  }
+
+  openTrunk() {
+    console.log("Motorbikes don't have trunks.");
+  }
 }
+
+const car = new Car();
+car.drive();
+car.park();
+car.turnOnAirConditioning();
+car.openTrunk();
+
+const motorbike = new Motorbike();
+motorbike.drive();
+motorbike.park();
+motorbike.turnOnAirConditioning();
+motorbike.openTrunk();

@@ -5,8 +5,6 @@ function login(username, password) {
   if (!password || password.length < 8) {
     return 'Password must be at least 8 characters long.';
   }
-
-  // Code to authenticate user
 }
 
 function register(username, password) {
@@ -16,8 +14,6 @@ function register(username, password) {
   if (!password || password.length < 8) {
     return 'Password must be at least 8 characters long.';
   }
-  
-  // Code to register new user
 }
 
 console.log(login('test', 'test123'));
