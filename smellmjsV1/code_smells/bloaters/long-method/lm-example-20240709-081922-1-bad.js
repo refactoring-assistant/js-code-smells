@@ -1,54 +1,52 @@
-function userRegistration(username, password, email, firstName, lastName, dob, address, zip, country, phoneNumber, securityQuestion, securityAnswer) {
-  if( username === '') {
-    console.log('username is required');
-    return false;
-  } 
-  else if( password === ''){
-    console.log('password is required');
+function userRegistration(user) {
+  if (user.username === '') {
+    console.log('Username is required');
     return false;
   }
-  else if( email === ''){
-    console.log('email is required');
+  if (user.password === '') {
+    console.log('Password is required');
     return false;
   }
-  else if( firstName === ''){
-    console.log('firstName is required');
+  if (user.email === '') {
+    console.log('Email is required');
     return false;
   }
-  else if( lastName === ''){
-    console.log('lastName is required');
+  if (user.firstName === '') {
+    console.log('First name is required');
     return false;
   }
-  else if( dob === ''){
-    console.log('dob is required');
+  if (user.lastName === '') {
+    console.log('Last name is required');
     return false;
   }
-  else if( address === ''){
-    console.log('address is required');
+  if (user.dob === '') {
+    console.log('Date of birth is required');
     return false;
   }
-  else if( zip === ''){
-    console.log('zip is required');
+  if (user.address === '') {
+    console.log('Address is required');
     return false;
   }
-  else if( country === ''){
-    console.log('country is required');
+  if (user.zip === '') {
+    console.log('ZIP code is required');
     return false;
   }
-  else if( phoneNumber === ''){
-    console.log('phoneNumber is required');
+  if (user.country === '') {
+    console.log('Country is required');
     return false;
   }
-  else if( securityQuestion === ''){
-    console.log('securityQuestion is required');
+  if (user.phoneNumber === '') {
+    console.log('Phone number is required');
     return false;
   }
-  else if( securityAnswer === ''){
-    console.log('securityAnswer is required');
+  if (user.securityQuestion === '') {
+    console.log('Security question is required');
     return false;
   }
-  else {
-    console.log('Registration successful!');
-    // code to register the user
+  if (user.securityAnswer === '') {
+    console.log('Security answer is required');
+    return false;
   }
+
+  console.log('Registration successful!');
 }

@@ -24,20 +24,8 @@ class Order {
 }
 
 const orderManager = new Order();
-orderManager.addOrder(
-  1,
-  'John Doe',
-  'Apple',
-  10,
-  2
-);
-orderManager.addOrder(
-  2,
-  'Jane Smith',
-  'Banana',
-  5,
-  1.5
-);
+orderManager.addOrder(1, 'John Doe', 'Apple', 10, 2);
+orderManager.addOrder(2, 'Jane Smith', 'Banana', 5, 1.5);
 
 console.log(orderManager.getOrderInfo(1));
 orderManager.updateOrderQuantity(1, 15);

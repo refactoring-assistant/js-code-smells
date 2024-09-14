@@ -1,8 +1,17 @@
-function getUserFullName(user) {
-  const firstName = user[0];
-  const lastName = user[1];
-  return `${firstName} ${lastName}`;
+function getFullName(firstName, lastName) {
+  return firstName + ' ' + lastName;
 }
 
-const user = ['Alice', 'Bennett'];
-console.log(getUserFullName(user));
+function getFormattedAddress(street, city, state, zipcode) {
+  return street + ', ' + city + ', ' + state + ' ' + zipcode;
+}
+
+const firstName = 'Alice';
+const lastName = 'Bennett';
+const street = '123 Main St';
+const city = 'New York';
+const state = 'NY';
+const zipcode = '10001';
+
+console.log('Full Name: ' + getFullName(firstName, lastName));
+console.log('Address: ' + getFormattedAddress(street, city, state, zipcode));

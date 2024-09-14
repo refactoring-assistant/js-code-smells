@@ -1,8 +1,12 @@
-let user = {
-    first_name: "John",
-    last_name: "Doe",
-    address: "123 Main Street",
-    city: "New York",
-    state: "NY",
-    country: "USA",
-};
+function createUser(firstName, lastName, address, city, state, country) {
+  return `${firstName} ${lastName} lives at ${address}, ${city}, ${state}, ${country}`;
+}
+
+const firstName = 'John';
+const lastName = 'Doe';
+const address = '123 Main Street';
+const city = 'New York';
+const state = 'NY';
+const country = 'USA';
+
+console.log(createUser(firstName, lastName, address, city, state, country));

@@ -4,10 +4,10 @@ class Product {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.author = author; //Specific to books
-        this.pages = pages; //Specific to books
-        this.color = color; //Specific to shirts
-        this.size = size; //Specific to shirts
+        this.author = author;
+        this.pages = pages;
+        this.color = color;
+        this.size = size;
     }
 
     getBookDetails() {

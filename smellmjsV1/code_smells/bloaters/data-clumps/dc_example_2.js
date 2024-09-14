@@ -1,22 +1,19 @@
-function getUserDetails(id, name, email, city, state, zip) {
-  console.log(`Fetching details for user: ${id}, ${name}, ${email}, ${city}, ${state}, ${zip}`);
+function getUserAddress(city, state, zip) {
+  console.log(`Address: ${city}, ${state}, ${zip}`);
 }
 
-function updateUserDetails(id, name, email, city, state, zip) {
-  console.log(`Updating details for user: ${id}, ${name}, ${email}, ${city}, ${state}, ${zip}`);
+function getShippingAddress(city, state, zip) {
+  console.log(`Shipping Address: ${city}, ${state}, ${zip}`);
 }
 
-function deleteUserDetails(id, name, email, city, state, zip) {
-  console.log(`Deleting details for user: ${id}, ${name}, ${email}, ${city}, ${state}, ${zip}`);
+function getBillingAddress(city, state, zip) {
+  console.log(`Billing Address: ${city}, ${state}, ${zip}`);
 }
 
-const userId = 1;
-const userName = 'John Doe';
-const userEmail = 'johndoe@example.com';
 const userCity = 'New York';
 const userState = 'NY';
 const userZip = '10001';
 
-getUserDetails(userId, userName, userEmail, userCity, userState, userZip);
-updateUserDetails(userId, userName, userEmail, userCity, userState, userZip);
-deleteUserDetails(userId, userName, userEmail, userCity, userState, userZip);
+getUserAddress(userCity, userState, userZip);
+getShippingAddress(userCity, userState, userZip);
+getBillingAddress(userCity, userState, userZip);

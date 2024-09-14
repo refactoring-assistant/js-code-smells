@@ -1,17 +1,11 @@
-function shippingInfo(firstName, lastName, addressOne, cityOne, countryOne, postalOne) {
-  console.log(
-    `Shipping to ${firstName} ${lastName} at ${addressOne}, ${cityOne}, ${countryOne}, ${postalOne}`
-  );
+function shippingInfo(address, city, country, postal) {
+  console.log(`Shipping to: ${address}, ${city}, ${country}, ${postal}`);
 }
 
-function billingInfo(firstName, lastName, addressTwo, cityTwo, countryTwo, postalTwo) {
-  console.log(
-    `Billing to ${firstName} ${lastName} at ${addressTwo}, ${cityTwo}, ${countryTwo}, ${postalTwo}`
-  );
+function billingInfo(address, city, country, postal) {
+  console.log(`Billing to: ${address}, ${city}, ${country}, ${postal}`);
 }
 
-const FirstName = 'John';
-const LastName = 'Doe';
 const AddressOne = '123 Main St';
 const CityOne = 'New City';
 const CountryOne = 'USA';
@@ -21,5 +15,5 @@ const CityTwo = 'Old City';
 const CountryTwo = 'USA';
 const PostalTwo = '67890';
 
-shippingInfo(FirstName, LastName, AddressOne, CityOne, CountryOne, PostalOne);
-billingInfo(FirstName, LastName, AddressTwo, CityTwo, CountryTwo, PostalTwo);
+shippingInfo(AddressOne, CityOne, CountryOne, PostalOne);
+billingInfo(AddressTwo, CityTwo, CountryTwo, PostalTwo);

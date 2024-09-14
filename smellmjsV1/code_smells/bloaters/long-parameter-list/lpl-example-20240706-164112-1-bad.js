@@ -10,5 +10,4 @@ function processStudentData(studentId, firstName, lastName, grade1, grade2, grad
             zipcode: zipcode
         }
     };
-    // Further processing of studentData
 }

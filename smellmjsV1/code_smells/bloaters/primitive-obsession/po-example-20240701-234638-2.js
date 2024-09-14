@@ -1,11 +1,26 @@
-const isValidPassword = (password) => {
-  const length = password.length;
-  const hasSpecialCharacter = /[!@#$%^&*]/.test(password);
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasDigit = /\d/.test(password);
+function createUser(firstName, lastName, email, phoneNumber) {
+  return {
+    fullName: firstName + ' ' + lastName,
+    email: email,
+    phoneNumber: phoneNumber,
+  };
+}
 
-  return length >= 8 && hasSpecialCharacter && hasUpperCase && hasLowerCase && hasDigit;
-};
+function sendWelcomeEmail(firstName, lastName, email) {
+  const fullName = firstName + ' ' + lastName;
+  console.log(`Sending welcome email to ${fullName} at ${email}`);
+}
 
-console.log(isValidPassword("Example1$"));
+function validatePhoneNumber(phoneNumber) {
+  const isValid = /^\d{10}$/.test(phoneNumber);
+  console.log(`Phone number ${phoneNumber} is valid: ${isValid}`);
+}
+
+const firstName = 'John';
+const lastName = 'Doe';
+const email = 'john.doe@example.com';
+const phoneNumber = '5551234567';
+
+const newUser = createUser(firstName, lastName, email, phoneNumber);
+sendWelcomeEmail(firstName, lastName, email);
+validatePhoneNumber(phoneNumber);
