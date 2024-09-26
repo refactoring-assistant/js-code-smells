@@ -57,5 +57,4 @@ const store = new Store();
 store.addProduct(1, 'Laptop', 1000, 20);
 store.getProductDetails();
 
-store.applyPromotion('SAVE10', 10);
 store.checkInventory();
